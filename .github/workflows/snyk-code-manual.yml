@@ -4,7 +4,6 @@ on:
     branches: [ snyk-actions ]
   push:
     branches: [ snyk-actions ]
-
 jobs:
   build:
     name: sarif testing action

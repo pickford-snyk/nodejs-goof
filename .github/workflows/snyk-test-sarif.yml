@@ -1,11 +1,11 @@
-name: "snyk test"
+name: "snyk test with SARIF upload"
 on: 
   pull_request: 
     branches: [ snyk-actions ]
   push:
     branches: [ snyk-actions ]
 jobs:
-  build:
+  security:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,4 +18,8 @@ jobs:
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: snyk-sarif1.json
+          args: --sarif-file-output=snyk.sarif
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk.sarif
