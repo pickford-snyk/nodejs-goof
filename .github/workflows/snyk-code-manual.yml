@@ -1,9 +1,9 @@
 name: "snyk code manual test"
-on: 
-  pull_request: 
-    branch: [ snyk-actions ]
+on:
+  pull_request:
+    branches: [ snyk-actions ]
   push:
-    branch: [ snyk-actions ]
+    branches: [ snyk-actions ]
 
 jobs:
   build:
