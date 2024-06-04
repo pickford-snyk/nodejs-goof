@@ -1,6 +1,8 @@
-name: Example workflow for Node using Snyk
+name: "snyk test with SARIF upload"
 on: 
-  pull_request:
+  pull_request: 
+    branches: [ snyk-actions ]
+  push:
     branches: [ snyk-actions ]
 jobs:
   security:
