@@ -6,6 +6,8 @@ description: |
   It updates {{ package_name }} from version {{ package_from }} to version {{ package_to }}.
   Review relevant docs for possible breaking changes.
   {{ /is_upgrade_pr }}
+
+  To find more details, visit {{ snyk_project_url }}
   
   **Tickets**
   {{ #jira_ids }}
