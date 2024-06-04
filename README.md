@@ -14,11 +14,19 @@ This vulnerable app includes the following capabilities to experiment with:
 ```bash
 mongod &
 
-git clone https://github.com/snyk/goof.git
+git clone https://github.com/snyk-labs/nodejs-goof
 npm install
 npm start
 ```
 This will run Goof locally, using a local mongo on the default port and listening on port 3001 (http://localhost:3001)
+
+Note: You *have* to use an old version of MongoDB version due to some of these old libraries' database server APIs. MongoDB 3 is known to work ok.
+
+You can also run the MongoDB server individually via Docker, such as:
+
+```sh
+docker run --rm -p 27017:27017 mongo:3
+```
 
 ## Running with docker-compose
 ```bash
@@ -193,7 +201,7 @@ To run the Node.js app with runtime monitoring:
 SNYK_PROJECT_ID=<PROJECT_ID> npm start
 ```
 
-** The app will continue to work normally even if not provided a project id
+** The app will continue to work normally even if it's not provided a project id
 
 ## Fixing the issues
 To find these flaws in this application (and in your own apps), run:
