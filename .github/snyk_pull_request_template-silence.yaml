@@ -13,3 +13,5 @@ description: |
   {{ /jira_ids }}
   
   To find more details, see the Snyk project [{{ snyk_project_name }}]({{ snyk_project_url }})
+
+  Open this project locally ${{ LOCAL_PROJECT_PATH }}

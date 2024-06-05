@@ -1,8 +1,9 @@
 name: "snyk code test"
 on: 
-  pull_request:
+  pull_request: 
     branches: [ snyk-actions ]
-    
+  push:
+    branches: [ snyk-actions ]
 jobs:
   build:
     runs-on: ubuntu-latest
