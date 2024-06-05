@@ -3,7 +3,7 @@ on:
   pull_request: 
     branches: [ snyk-actions ]
   push:
-    branches: [ snyk-actions 
+    branches: [ snyk-actions ]
 jobs:
   build:
     runs-on: ubuntu-latest
