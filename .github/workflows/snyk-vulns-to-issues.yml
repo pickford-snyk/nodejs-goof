@@ -1,4 +1,4 @@
-name: Snyk SCM Issues to Github Issues
+name: snyk-labs/action example - Snyk Issues to Github Issues
 on: 
   push:
     branches:
@@ -7,11 +7,17 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: snyk-labs/actions/scm-issues-to-gh-issues@main
-        with:
-          snyk_prefix: "gh-action_pickford-snyk"
-          use_fresh_issues: "true"
+      - uses: actions/checkout@v2
+      - uses: snyk/actions/setup@master
+      - uses: actions/setup-node@v1
+      - name: snyk test
+        run: snyk test --all-projects --severity-threshold=high --sarif-file-output=snyk.sarif
+        continue-on-error: true
         env:
-          SNYK_TOKEN: ${{ secrets.VULN_ISSUE_TOKEN }}
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - uses: snyk-labs/actions/sarif-to-gh-issues@main
+        with:
+          sarif_file: snyk.sarif
+        env:
           GITHUB_TOKEN: ${{ github.token }}
           REMOTE_REPO_URL: ${{ github.repositoryUrl }}
