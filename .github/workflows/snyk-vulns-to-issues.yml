@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: snyk-labs/actions/scm-issues-to-gh-issues@main
         with:
-          snyk_prefix: "cse"
+          snyk_prefix: "orca-appsec"
           use_fresh_issues: "true"
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
