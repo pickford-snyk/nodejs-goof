@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: snyk-labs/actions/scm-issues-to-gh-issues@main
         with:
-          snyk_prefix: ""
+          snyk_prefix: "gh-action_pickford-snyk"
           use_fresh_issues: "true"
         env:
           SNYK_TOKEN: ${{ secrets.VULN_ISSUE_TOKEN }}
