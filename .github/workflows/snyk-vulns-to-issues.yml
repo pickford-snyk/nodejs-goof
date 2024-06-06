@@ -2,7 +2,7 @@ name: Snyk SCM Issues to Github Issues
 on: 
   push:
     branches:
-      - snyk-actions
+      - custom-config
 jobs:
   security:
     runs-on: ubuntu-latest
