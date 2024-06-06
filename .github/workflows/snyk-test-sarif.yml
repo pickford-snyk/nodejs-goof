@@ -12,7 +12,7 @@ jobs:
       - uses: snyk/actions/setup@master
       - name: Snyk Test
         run: snyk test --sarif-file-output=snyk-sarif1.json
-        continue-on-error: true
+        continue-on-error: false
         env:
            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       - name: Upload SARIF file
