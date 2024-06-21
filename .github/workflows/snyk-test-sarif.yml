@@ -3,7 +3,7 @@ on:
   pull_request: 
     branches: [ snyk-actions ]
   push:
-    branches: [ snyk-actions ]
+    branches: [ cusom-config ]
 jobs:
   security:
     runs-on: ubuntu-latest
