@@ -1,6 +1,9 @@
 name: "snyk code manual test"
-on: [push, pull_request]
-
+on:
+  pull_request:
+    branches: [ snyk-actions ]
+  push:
+    branches: [ snyk-actions ]
 jobs:
   build:
     name: sarif testing action
