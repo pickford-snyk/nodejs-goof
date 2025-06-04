@@ -1,0 +1,64 @@
+# Docs: https://docs.cortex.io/docs/reference/basics/entities#service-entities
+
+openapi: 3.0.0
+info:
+  title: mint
+  description: >
+    A server-to-server authentication service.
+  x-cortex-type: service
+  x-cortex-owners:
+    - type: group
+      name: fnd-iam
+      provider: CORTEX
+  x-cortex-dependency:
+    - tag: outreach
+  x-cortex-tag: mint
+  x-cortex-git:
+    github:
+      repository: getoutreach/mint
+  x-cortex-oncall:
+    pagerduty:
+      id: PXJQPM7
+      type: SERVICE
+  x-cortex-link:
+    ## These are useful documentation links for this service. Please fill in the customLinks block if you have additional documentation links.
+    ## name: The name of the link
+    ## type: Choose one type from (dashboard,documentation,healthcheck,logs,metrics,runbook)
+    ## url: The link url
+    ## description(optional): Description to this link
+    - name: Main dashboards
+      type: dashboard
+      url: https://app.datadoghq.com/dashboard/uye-wkc-d6w
+    - name: Team PagerDuty
+      type: incidents
+      url: https://outreach.pagerduty.com/escalation_policies#PM6ZT2B
+    - name: API Docs
+      type: api_documentation
+      url: https://engdocs.outreach.cloud/github.com/getoutreach/mint#section-readme
+    ## <<Stencil::Block(customLinks)>>
+    ## <</Stencil::Block>>
+  x-cortex-custom-metadata:
+    app: mint
+    name: mint
+    repo: https://github.com/getoutreach/mint
+    tier: tier_0
+    framework: stencil
+    language: Golang
+    stencil_version: v1.41.0
+    golang_version: 1.23.4
+    cli: false
+    service: true
+    product: Outreach
+    lifecycle: public_ga
+    ## <<Stencil::Block(extraAliases)>>
+    ## <</Stencil::Block>>
+    reporting_team: fnd-iam
+    lintroller: gold
+  x-cortex-groups:
+    - lifecycle:public_ga
+    - tier:tier_0
+    - product:Outreach
+    - language:Golang
+    - framework:stencil
+    - type:service
+    - engOrg:fnd
