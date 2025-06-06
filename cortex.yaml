@@ -1,6 +1,7 @@
 # Docs: https://docs.cortex.io/docs/reference/basics/entities#service-entities
 
 openapi: 3.0.0
+kind: component
 info:
   title: mint
   description: >
