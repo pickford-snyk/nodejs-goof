@@ -14,7 +14,7 @@ exports.getRecycleItem = () => (req: Request, res: Response) => {
       id: JSON.parse(req.params.id)
     }
   }).then((Recycle) => {
-    return res.send(utils.queryResultToJson(Recycle))
+    return res.json(utils.queryResultToJson(Recycle))
   })
 }
 
