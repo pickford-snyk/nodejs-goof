@@ -1,9 +1,7 @@
 name: "snyk code test"
 on: 
   pull_request: 
-    branches: *
   push:
-    branches: *
 jobs:
   build:
     runs-on: ubuntu-latest
