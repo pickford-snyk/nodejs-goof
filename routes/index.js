@@ -30,6 +30,7 @@ exports.index = function (req, res, next) {
         title: 'Patch TODO List',
         subhead: 'Vulnerabilities at their best',
         todos: todos,
+        csrfToken: req.csrfToken(),
       });
     });
 };
