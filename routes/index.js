@@ -35,20 +35,33 @@ exports.index = function (req, res, next) {
 };
 
 exports.loginHandler = function (req, res, next) {
-  if (validator.isEmail(req.body.username)) {
-    User.find({ username: req.body.username, password: req.body.password }, function (err, users) {
-      if (users.length > 0) {
+  var rawUser = req.body && req.body.username;
+  var rawPass = req.body && req.body.password;
+  if (typeof rawUser !== 'string' || typeof rawPass !== 'string') {
+    return res.status(400).send();
+  }
+  var username = validator.trim(rawUser).toLowerCase();
+  if (!validator.isEmail(username)) {
+    return res.status(401).send();
+  }
+  username = validator.normalizeEmail(username, { gmail_remove_dots: false });
+  // HTML-escape for safe output/logging; keep `username` unescaped for the DB lookup above.
+  var usernameEscaped = validator.escape(username);
+  var password = rawPass;
+
+  // Use query builder .equals() so credentials are bound as literal values (not request-shaped objects).
+  User.findOne()
+    .where('username').equals(username)
+    .where('password').equals(password)
+    .exec(function (err, user) {
+      if (err) return next(err);
+      if (user) {
         const redirectPage = req.body.redirectPage
         const session = req.session
-        const username = req.body.username
-        return adminLoginSuccess(redirectPage, session, username, res)
-      } else {
-        return res.status(401).send()
+        return adminLoginSuccess(redirectPage, session, usernameEscaped, res)
       }
+      return res.status(401).send()
     });
-  } else {
-    return res.status(401).send()
-  }
 };
 
 function adminLoginSuccess(redirectPage, session, username, res) {
