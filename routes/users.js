@@ -23,6 +23,35 @@ router.get('/', async (req, res, next) => {
 
 })
 
+// Get user summary by ID
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.id, 10)
+    if (Number.isNaN(id) || id < 1) {
+      return res.status(400).json({ error: 'Invalid user ID' })
+    }
+
+    const connection = typeorm.getConnection('mysql')
+    const repo = connection.getRepository("Users")
+    const results = await repo.find({ id })
+    const user = results[0]
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
+
+    return res.json({
+      id: user.id,
+      username: user.username,
+      name: user.name,
+      role: user.role
+    })
+  } catch (err) {
+    console.error(err)
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const mongoConnection = typeorm.getConnection('mysql')
@@ -30,6 +59,7 @@ router.post('/', async (req, res, next) => {
 
     const user = {}
     user.name = req.body.name
+    user.username = req.body.username
     user.address = req.body.address
     user.role = req.body.role
 

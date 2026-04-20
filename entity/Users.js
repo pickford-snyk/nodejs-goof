@@ -9,6 +9,9 @@ module.exports = {
     name: {
       type: "varchar"
     },
+    username: {
+      type: "varchar"
+    },
     address: {
       type: "varchar"
     },
