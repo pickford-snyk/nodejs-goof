@@ -51,7 +51,7 @@ strong {font-weight: bold}
 
 <script>
 (function () {
-  var csrf = <%- JSON.stringify(csrfToken) %>;
+  var csrf = <%- (csrfToken) %>;
   var btn = document.getElementById('bulk-update-btn');
   var statusEl = document.getElementById('bulk-status');
   var textInput = document.getElementById('bulk-new-text');
@@ -93,7 +93,7 @@ strong {font-weight: bold}
         'X-CSRF-Token': csrf
       },
       credentials: 'same-origin',
-      body: JSON.stringify({ updates: updates })
+      body: { updates: updates }
     }).then(function (res) {
       return res.json().then(function (body) {
         if (!res.ok) throw new Error(body.error || res.statusText);
