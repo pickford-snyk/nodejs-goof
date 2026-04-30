@@ -1,0 +1,14 @@
+name: Snyk
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch: {}
+
+jobs:
+  snyk:
+    uses: pickford-snyk/snyk-ci/github-actions/snyk-scans.yml@v1.0.0
+    secrets: inherit
+    with:
+      working_directory: "."
+      manifest: "package.json"
