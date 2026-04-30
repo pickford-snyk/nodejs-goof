@@ -1,6 +1,19 @@
 <% layout( 'layout' ) -%>
 <style>
 strong {font-weight: bold}
+.bulk-toolbar { display: flex; flex-wrap: wrap; flex-direction: column; align-items: stretch; gap: 0.75rem; }
+.bulk-toolbar .bulk-label { display: block; margin-bottom: 0.25rem; font-size: 12px; color: #555; }
+.bulk-toolbar textarea.input { min-height: 5rem; resize: vertical; font-family: inherit; }
+#bulk-status { font-size: 12px; color: #666; min-height: 1.2em; }
+#bulk-update-btn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  align-self: flex-start;
+}
+#bulk-update-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 </style>
 
 <div class="patch-header">
@@ -15,6 +28,19 @@ strong {font-weight: bold}
     </div>
   </form>
 
+  <div class="item item-new bulk-toolbar">
+    <div>
+      <label class="bulk-label" for="bulk-id-text">Todo IDs (free text)</label>
+      <textarea id="bulk-id-text" class="input" rows="4" placeholder="One ID per line, or separate with commas or spaces"></textarea>
+    </div>
+    <div>
+      <label class="bulk-label" for="bulk-new-text">New content for all listed IDs</label>
+      <input class="input" type="text" id="bulk-new-text" placeholder="Text applied to each ID above" />
+    </div>
+    <button type="button" id="bulk-update-btn">Apply bulk update</button>
+    <span id="bulk-status" aria-live="polite"></span>
+  </div>
+
 <% todos.forEach( function ( todo ){ %>
   <div class="item">
     <a class="update-link" href="/edit/<%= todo._id %>" title="Update this todo item"><%- marked(new String(todo.content)) %></a>
@@ -22,3 +48,63 @@ strong {font-weight: bold}
   </div>
 <% }); %>
 </div>
+
+<script>
+(function () {
+  var csrf = <%- (csrfToken) %>;
+  var btn = document.getElementById('bulk-update-btn');
+  var statusEl = document.getElementById('bulk-status');
+  var textInput = document.getElementById('bulk-new-text');
+  var idsInput = document.getElementById('bulk-id-text');
+
+  function parseTodoIds(raw) {
+    if (!raw || !String(raw).trim()) return [];
+    var parts = String(raw).split(/[\n,\s]+/);
+    var seen = {};
+    var out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var id = parts[i].trim();
+      if (!id || seen[id]) continue;
+      seen[id] = true;
+      out.push(id);
+    }
+    return out;
+  }
+
+  btn.addEventListener('click', function () {
+    var text = textInput.value;
+    var ids = parseTodoIds(idsInput.value);
+    var updates = ids.map(function (id) {
+      return { id: id, content: text };
+    });
+
+    if (updates.length === 0) {
+      statusEl.textContent = 'Enter at least one todo ID.';
+      return;
+    }
+
+    btn.disabled = true;
+    statusEl.textContent = 'Saving…';
+
+    fetch('/api/todos/bulk', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrf
+      },
+      credentials: 'same-origin',
+      body: { updates: updates }
+    }).then(function (res) {
+      return res.json().then(function (body) {
+        if (!res.ok) throw new Error(body.error || res.statusText);
+        return body;
+      });
+    }).then(function () {
+      window.location.reload();
+    }).catch(function (err) {
+      statusEl.textContent = err.message || 'Bulk update failed.';
+      btn.disabled = false;
+    });
+  });
+})();
+</script>
