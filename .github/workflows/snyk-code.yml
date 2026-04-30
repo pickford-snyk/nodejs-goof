@@ -1,0 +1,16 @@
+name: "snyk code test"
+on: 
+  pull_request: 
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: snyk/actions/setup@master
+      - name: Snyk Test
+        run: snyk code test --org=${{ secrets.SNYK_ORG }} --sarif > snyk-sarif2.json
+        continue-on-error: true
+        env:
+           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+

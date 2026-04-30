@@ -11,7 +11,5 @@ npm-debug.log
 .dcignore
 .idea/
 .dccache
-
-
-# Snyk Security Extension - AI Rules (auto-generated)
 .cursor/rules/snyk_rules.mdc
+.vscode
