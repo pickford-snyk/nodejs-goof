@@ -1,0 +1,92 @@
+# Reusable workflow — commit only in this (central) repository.
+# Application repos call: uses: <org>/snyk-ci/.github/workflows/snyk-reusable.yml@<tag>
+#
+# Policy is Organization variables (AppSec), not YAML checked out in the workflow.
+# Per-repo paths come from workflow_call inputs (with: on the caller).
+#
+# Required Organization variables (Settings → Variables → Actions):
+#   SNYK_ORG, SNYK_CLI_VERSION (or rely on default below), SNYK_SEVERITY_THRESHOLD,
+#   SNYK_CODE_SEVERITY_THRESHOLD, SNYK_SCAN_SCA, SNYK_SCAN_CODE, SNYK_SARIF (all strings; use true/false for toggles)
+name: Snyk (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      working_directory:
+        description: Directory containing the manifest (relative to repository root)
+        type: string
+        default: "."
+      manifest:
+        description: Manifest file path relative to working_directory
+        type: string
+        default: "package.json"
+    secrets:
+      SNYK_TOKEN:
+        description: Snyk API token (from the calling repository)
+        required: true
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    env:
+      SNYK_ORG: ${{ vars.SNYK_ORG }}
+      SNYK_CLI_VERSION: ${{ vars.SNYK_CLI_VERSION || 'latest' }}
+      SNYK_SEVERITY_THRESHOLD: ${{ vars.SNYK_SEVERITY_THRESHOLD }}
+      SNYK_CODE_SEVERITY_THRESHOLD: ${{ vars.SNYK_CODE_SEVERITY_THRESHOLD }}
+    steps:
+      - name: Checkout application (caller) repository
+        uses: actions/checkout@v4
+
+      - name: Verify required Organization variables
+        run: |
+          set -eu
+          test -n "${{ vars.SNYK_ORG }}" || { echo "::error::Set Organization variable SNYK_ORG"; exit 1; }
+          test -n "${{ vars.SNYK_SEVERITY_THRESHOLD }}" || { echo "::error::Set Organization variable SNYK_SEVERITY_THRESHOLD"; exit 1; }
+          test -n "${{ vars.SNYK_CODE_SEVERITY_THRESHOLD }}" || { echo "::error::Set Organization variable SNYK_CODE_SEVERITY_THRESHOLD"; exit 1; }
+
+      - name: Install Snyk CLI
+        uses: snyk/actions/setup@master
+        with:
+          snyk-version: ${{ env.SNYK_CLI_VERSION }}
+
+      - name: Run Snyk Open Source
+        if: vars.SNYK_SCAN_SCA == 'true'
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          set -eu
+          if [ "${{ vars.SNYK_SARIF }}" = "true" ]; then
+            snyk test --org="$SNYK_ORG" --severity-threshold="$SNYK_SEVERITY_THRESHOLD" --file="${{ inputs.manifest }}" --sarif-file=snyk-sca.sarif
+          else
+            snyk test --org="$SNYK_ORG" --severity-threshold="$SNYK_SEVERITY_THRESHOLD" --file="${{ inputs.manifest }}"
+          fi
+
+      - name: Upload SCA SARIF
+        if: vars.SNYK_SCAN_SCA == 'true' && vars.SNYK_SARIF == 'true' && success()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ format('{0}/snyk-sca.sarif', inputs.working_directory) }}
+
+      - name: Run Snyk Code
+        if: vars.SNYK_SCAN_CODE == 'true'
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+          set -eu
+          if [ "${{ vars.SNYK_SARIF }}" = "true" ]; then
+            snyk code test --org="$SNYK_ORG" --severity-threshold="$SNYK_CODE_SEVERITY_THRESHOLD" --sarif-file=snyk-code.sarif
+          else
+            snyk code test --org="$SNYK_ORG" --severity-threshold="$SNYK_CODE_SEVERITY_THRESHOLD"
+          fi
+
+      - name: Upload Code SARIF
+        if: vars.SNYK_SCAN_CODE == 'true' && vars.SNYK_SARIF == 'true' && success()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{ format('{0}/snyk-code.sarif', inputs.working_directory) }}
