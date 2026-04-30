@@ -14,6 +14,7 @@ var path = require('path');
 var ejsEngine = require('ejs-locals');
 var bodyParser = require('body-parser');
 var session = require('express-session')
+var csurf = require('csurf')
 var methodOverride = require('method-override');
 var logger = require('morgan');
 var errorHandler = require('errorhandler');
@@ -28,6 +29,9 @@ const hbs = require('hbs')
 var app = express();
 var routes = require('./routes');
 var routesUsers = require('./routes/users.js')
+var routesUserDescriptions = require('./routes/user-descriptions.js')
+var routesTodos = require('./routes/todos.js')
+var routesHealth = require('./routes/health.js')
 
 // all environments
 app.set('port', process.env.PORT || 3001);
@@ -44,6 +48,7 @@ app.use(session({
   name: 'connect.sid',
   cookie: { path: '/' }
 }))
+app.use(csurf())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(fileUpload());
@@ -67,6 +72,9 @@ app.get('/chat', routes.chat.get);
 app.put('/chat', routes.chat.add);
 app.delete('/chat', routes.chat.delete);
 app.use('/users', routesUsers)
+app.use('/user-descriptions', routesUserDescriptions)
+app.use('/api/todos', routesTodos)
+app.use('/api/health', routesHealth)
 
 // Static
 app.use(st({ path: './public', url: '/public' }));
